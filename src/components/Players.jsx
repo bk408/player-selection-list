@@ -23,20 +23,26 @@ const Players = () => {
 
   const handleDropInSelected = () => {
     if (draggedPlayer) {
-      setPlayerList(
-        playerList.filter((player) => player.id !== draggedPlayer.id)
-      );
-      setSelectedPlayer([...selectedPlayer, draggedPlayer]);
+      // check if the player is already in selectedPlayer to avoid duplicates
+      if (!selectedPlayer.some((player) => player.id === draggedPlayer.id)) {
+        setPlayerList(
+          playerList.filter((player) => player.id !== draggedPlayer.id)
+        );
+        setSelectedPlayer([...selectedPlayer, draggedPlayer]);
+      }
       setDraggedPlayer(null); // reset after drop
     }
   };
 
   const handleDropInPlayers = () => {
     if (draggedPlayer) {
-      setSelectedPlayer(
-        selectedPlayer.filter((player) => player.id !== draggedPlayer.id)
-      );
-      setPlayerList([...playerList, draggedPlayer]);
+      // Check if the player is already in playerList to avoid duplicates
+      if (!playerList.some((player) => player.id === draggedPlayer.id)) {
+        setSelectedPlayer(
+          selectedPlayer.filter((player) => player.id !== draggedPlayer.id)
+        );
+        setPlayerList([...playerList, draggedPlayer]);
+      }
       setDraggedPlayer(null); // reset after drop
     }
   };
